@@ -1,6 +1,8 @@
+version: "3.8"
+
 services:
   mysql:
-    user: "${UID:-1000}:${GID:-1000}" # Set default values if UID/GID is not defined
+    user: "${UID}:${GID}" 
     image: mysql:5.7
     platform: linux/amd64
     container_name: mysql
@@ -22,9 +24,7 @@ services:
       start_period: 60s
 
   flask-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: sahastra16/two-tier-flask-app-new:latest
     container_name: flask-app
     ports:
       - "5001:5000"
@@ -44,11 +44,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-    volumes:
-      - ./app/templates:/app/templates
-      - ./app/static:/app/static
 
-# Ensure the network is defined
 networks:
   twotier:
-    driver: bridge
