@@ -1,10 +1,8 @@
-version: "3.8"
-
 services:
   mysql:
-    user: "${UID}:${GID}" 
+    user: "1000:1000"
     image: mysql:5.7
-    platform: linux/amd64
+    platform: linux/arm64  # ✅ Change from amd64 to arm64
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -25,6 +23,7 @@ services:
 
   flask-app:
     image: sahastra16/two-tier-flask-app-new:latest
+    platform: linux/arm64  # ✅ Ensure it's arm64 for M1/M2 Macs
     container_name: flask-app
     ports:
       - "5001:5000"
@@ -38,6 +37,8 @@ services:
     networks:
       - twotier
     restart: always
+    volumes:
+      - ./templates:/app/templates  # ✅ Sync changes to index.html
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
       interval: 10s
