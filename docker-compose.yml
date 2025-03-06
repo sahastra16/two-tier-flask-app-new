@@ -1,7 +1,7 @@
 services:
   mysql:
     user: "1000:1000"
-    image: mysql:5.7
+    image: mysql:8.0
     platform: linux/arm64  # ✅ Change from amd64 to arm64
     container_name: mysql
     environment:
