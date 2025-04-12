@@ -25,7 +25,7 @@ pipeline{
         }
         stage("Deploy"){
             steps{
-                sh "docker compose up -d --build flask-app"
+                sh "docker compose down && docker compose up -d"
             }
         }    
     }
