@@ -1,17 +1,14 @@
+version: '3.8'
+
 services:
   mysql:
-   # user: "1000:1000"
     image: mysql:latest
-   # platform: linux/arm64  # ✅ Change from amd64 to arm64
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: devops
-     # MYSQL_USER: admin
-     # MYSQL_PASSWORD: admin
     volumes:
       - ./mysql-data:/var/lib/mysql
-     # - ./message.sql:/docker-entrypoint-initdb.d/message.sql  
     networks:
       - twotier
     healthcheck:
@@ -24,7 +21,6 @@ services:
 
   flask-app:
     image: two-tier-flask-new:latest
-   # platform: linux/arm64  # ✅ Ensure it's arm64 for M1/M2 Macs
     container_name: flask-app
     ports:
       - "5001:5000"
@@ -38,14 +34,6 @@ services:
     networks:
       - twotier
     restart: always
-    # volumes:
-    #  - ./templates:/app/templates  # ✅ Sync changes to index.html
-    # healthcheck:
-    #  test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
-    #  interval: 10s
-    #  timeout: 5s
-    #  retries: 5
-    #  start_period: 30s
-      
+
 networks:
   twotier:
