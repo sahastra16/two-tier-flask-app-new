@@ -1,12 +1,12 @@
 pipeline{
     
-    agent { label "dev"};
+    agent { label "dev"}
     
     stages{
         stage("Code Clone"){
             steps{
                script{
-                   clone("https://github.com/sahastra16/two-tier-flask-app-new.git", "prd")
+                    git url: 'https://github.com/sahastra16/two-tier-flask-app-new.git', branch: 'prd'
                }
             }
         }
