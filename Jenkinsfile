@@ -6,7 +6,7 @@ pipeline{
         stage("Code Clone"){
             steps{
                script{
-                   clone("https://github.com/LondheShubham153/two-tier-flask-app.git", "master")
+                   clone("git@github.com:sahastra16/two-tier-flask-app-new.git", "prd")
                }
             }
         }
@@ -29,13 +29,6 @@ pipeline{
             }
             
         }
-        stage("Push to Docker Hub"){
-            steps{
-                script{
-                    docker_push("dockerHubCreds","two-tier-flask-app")
-                }  
-            }
-        }
         stage("Deploy"){
             steps{
                 sh "docker compose up -d --build flask-app"
@@ -46,16 +39,16 @@ pipeline{
 post{
         success{
             script{
-                emailext from: 'mentor@trainwithshubham.com',
-                to: 'mentor@trainwithshubham.com',
+                emailext from: 'kedar.sahasrabudhe@gmail.com',
+                to: 'kedar.sahasrabudhe@hotmail.com',
                 body: 'Build success for Demo CICD App',
                 subject: 'Build success for Demo CICD App'
             }
         }
         failure{
             script{
-                emailext from: 'mentor@trainwithshubham.com',
-                to: 'mentor@trainwithshubham.com',
+                emailext from: 'kedar.sahasrabudhe@gmail.com',
+                to: 'kedar.sahasrabudhe@hotmail.com',
                 body: 'Build Failed for Demo CICD App',
                 subject: 'Build Failed for Demo CICD App'
             }
