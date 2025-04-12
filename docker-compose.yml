@@ -22,7 +22,7 @@ services:
       start_period: 60s
 
   flask-app:
-    image: sahastra16/two-tier-flask-app-new:latest
+    image: two-tier-flask-new:latest
     platform: linux/arm64  # ✅ Ensure it's arm64 for M1/M2 Macs
     container_name: flask-app
     ports:
