@@ -13,7 +13,7 @@ pipeline{
 
     stage("Build"){
             steps{
-                sh "docker build -t two-tier-flask-app ."
+                sh "docker build -t two-tier-flask-new ."
             }
             
         }
