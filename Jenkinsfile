@@ -10,14 +10,8 @@ pipeline{
                }
             }
         }
-        stage("Trivy File System Scan"){
-            steps{
-                script{
-                    trivy_fs()
-                }
-            }
-        }
-        stage("Build"){
+
+    stage("Build"){
             steps{
                 sh "docker build -t two-tier-flask-app ."
             }
@@ -33,25 +27,7 @@ pipeline{
             steps{
                 sh "docker compose up -d --build flask-app"
             }
-        }
+        }    
     }
 
-post{
-        success{
-            script{
-                emailext from: 'kedar.sahasrabudhe@gmail.com',
-                to: 'kedar.sahasrabudhe@hotmail.com',
-                body: 'Build success for Demo CICD App',
-                subject: 'Build success for Demo CICD App'
-            }
-        }
-        failure{
-            script{
-                emailext from: 'kedar.sahasrabudhe@gmail.com',
-                to: 'kedar.sahasrabudhe@hotmail.com',
-                body: 'Build Failed for Demo CICD App',
-                subject: 'Build Failed for Demo CICD App'
-            }
-        }
-    }
 }
