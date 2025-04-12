@@ -2,7 +2,7 @@ services:
   mysql:
     user: "1000:1000"
     image: mysql:8.0
-    platform: linux/arm64  # ✅ Change from amd64 to arm64
+   # platform: linux/arm64  # ✅ Change from amd64 to arm64
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -23,7 +23,7 @@ services:
 
   flask-app:
     image: two-tier-flask-new:latest
-    platform: linux/arm64  # ✅ Ensure it's arm64 for M1/M2 Macs
+   # platform: linux/arm64  # ✅ Ensure it's arm64 for M1/M2 Macs
     container_name: flask-app
     ports:
       - "5001:5000"
