@@ -1,14 +1,14 @@
 services:
   mysql:
     user: "1000:1000"
-    image: mysql:8.0
+    image: mysql:latest
    # platform: linux/arm64  # ✅ Change from amd64 to arm64
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: devops
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+     # MYSQL_USER: admin
+     # MYSQL_PASSWORD: admin
     volumes:
       - ./mysql-data:/var/lib/mysql
       - ./message.sql:/docker-entrypoint-initdb.d/message.sql  
